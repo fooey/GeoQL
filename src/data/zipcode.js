@@ -1,5 +1,5 @@
 import _ from 'lodash';
-// import sql from 'mssql';
+import DataLoader from 'dataloader';
 
 import DB from 'src/data/db';
 import {
@@ -7,6 +7,14 @@ import {
 	mapToKeys,
 	mapToKeysMany,
 } from 'src/data/util';
+
+
+
+export default class ZipCode {
+	getZipCode = new DataLoader(zipcodes => getZipCode(zipcodes));
+	getAlternativeCityNames = new DataLoader(zipcode => getZipCodeAlternativeCityNames(zipcode));
+	getUnacceptableCityNames = new DataLoader(zipcode => getZipCodeUnacceptableCityNames(zipcode));
+}
 
 
 export async function getZipCode(zipCodes) {
@@ -34,7 +42,7 @@ export async function getZipCode(zipCodes) {
 			, longitude
 		FROM ZipCodes WITH(READUNCOMMITTED)
 		WHERE cityType = 'D'
-			${!_.isEmpty(sanitizedZipCodes) ? `AND zipcode IN (${quotedList(sanitizedZipCodes)})` : ``}
+			AND zipcode IN (${quotedList(sanitizedZipCodes)})
 		ORDER BY zipcode, cityName;
 	`;
 	// ${!_.isEmpty(sanitizedCityTypes) ? `AND cityType IN (${quotedList(sanitizedCityTypes)})` : ``}

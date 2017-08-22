@@ -9,18 +9,24 @@ import schema from 'src/schema';
 import Loaders from 'src/data/loaders';
 
 const GRAPHQL_PORT = process.env.PORT || 3000;
-
-
-const graphQLServer = express();
+const app = express();
 
 DB.connect().then(() => {
-	graphQLServer.use('/graphql', bodyParser.json(), graphqlExpress({
-		schema,
-		context: { loaders: new Loaders() },
-	}));
-	graphQLServer.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
+	app.use(bodyParser.urlencoded({ extended: true }));
+	app.use(bodyParser.json());
 
-	graphQLServer.listen(GRAPHQL_PORT, () => console.log(
+	app.use('/graphql', graphqlExpress(req => {
+		const loaders = new Loaders();
+
+		return {
+			schema,
+			context: { req, loaders },
+		};
+	}));
+
+	app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
+
+	app.listen(GRAPHQL_PORT, () => console.log(
 		`GraphiQL is now running on http://localhost:${GRAPHQL_PORT}/graphiql`
 	));
 });
