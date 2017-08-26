@@ -1,12 +1,12 @@
 import _ from 'lodash';
 import DataLoader from 'dataloader';
 
-import DB from 'src/data/db';
+import DB from './db';
 import {
 	quotedList,
 	mapToKeys,
 	mapToKeysMany,
-} from 'src/data/util';
+} from './util';
 
 
 

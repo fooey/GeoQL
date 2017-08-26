@@ -1,12 +1,10 @@
-import 'app-module-path/cwd';
-
 import express from 'express';
 import { graphqlExpress, graphiqlExpress } from 'apollo-server-express';
 import bodyParser from 'body-parser';
 
-import DB from 'src/data/db';
-import schema from 'src/schema';
-import Loaders from 'src/data/loaders';
+import DB from './data/db';
+import schema from './schema';
+import Loaders from './data/loaders';
 
 const GRAPHQL_PORT = process.env.PORT || 3000;
 const app = express();

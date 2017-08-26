@@ -1,14 +1,15 @@
 import {
 	makeExecutableSchema,
 } from 'graphql-tools';
-import resolvers from 'src/resolvers';
+import resolvers from '../resolvers';
 
-import ZipCode from 'src/schema/zipcode';
-// import mocks from './mocks';
+import ZipCode from './zipcode';
+import City from './city';
 
 const RootQuery = `
 	type RootQuery {
 		zipcode(zipCode: [String!]): [ZipCode]
+		city(cityNameUrl: String!, stateAbbr: String!): [City]
 	}
 `;
 const SchemaDefinition = `
@@ -22,6 +23,7 @@ const schema = makeExecutableSchema({
 		SchemaDefinition,
 		RootQuery,
 		ZipCode,
+		City,
 	],
 	resolvers,
 });
