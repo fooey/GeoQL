@@ -27,10 +27,13 @@ export async function getZipCode(zipCodes) {
 			zipCode AS id
 			, zipCode
 			, cityName
+			, cityNameUrl
 			, cityType AS cityTypeCode
 			, countyName
+			, countyNameUrl
 			, countyFIPS
 			, stateName
+			, stateNameUrl
 			, stateAbbr
 			, stateFIPS
 			, msaCode

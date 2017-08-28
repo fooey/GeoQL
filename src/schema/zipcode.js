@@ -3,11 +3,14 @@ const ZipCode = `
 		id: ID
 		zipCode: String
 		cityName: String
+		cityNameUrl: String
 		countyName: String
 		cityTypeCode: String
 		countyName: String
+		countyNameUrl: String
 		countyFIPS: String
 		stateName: String
+		stateNameUrl: String
 		stateAbbr: String
 		stateFIPS: String
 		msaCode: String
